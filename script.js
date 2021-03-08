@@ -29,11 +29,11 @@ function keyDownHandler(e) {
     }
 }
 
-function keyUpHandler() {
+function keyUpHandler(e) {
     if (e.keyCode == 39) {
-        rightReleased = false;
+        rightPressed = false;
     } else if (e.keyCode == 37) {
-        leftReleased = false;
+        leftPressed = false;
     }
 }
 
