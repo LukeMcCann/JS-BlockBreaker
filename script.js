@@ -18,8 +18,44 @@ let paddleX = ((canvas.width - paddleWidth)/2);
 let rightPressed = false;
 let leftPressed = false;
 
+const brickRowCount = 3;
+const brickColumnCount = 5;
+const brickWidth = 75; 
+const brickHeight = 20;
+const brickPadding = 10;
+const brickOffsetTop = 30;
+const brickOffsetLeft = 30;
+
+const bricks = [];
+
+// for every column
+// for every row
+// create brick object with x and y coordinates
+for (c = 0; c < brickColumnCount; c++) {
+    bricks[c] = [];
+    for (r = 0; r < brickRowCount; r++) {
+        bricks[c][r] = {x: 0, y: 0}
+    }
+}
+
 document.addEventListener('keydown', keyDownHandler);
 document.addEventListener('keyup', keyUpHandler);
+
+function drawBricks() {
+    for (c = 0; c < brickColumnCount; c++) {
+        for (r = 0; r < brickRowCount; r++) {
+            let brickX = (c*(brickWidth + brickPadding) + brickOffsetLeft);
+            let brickY = (r*(brickHeight + brickPadding) + brickOffsetTop);
+            bricks[c][r].x = brickX;
+            bricks[c][r].y = brickY;
+            ctx.beginPath();
+            ctx.rect(brickX, brickY, brickWidth, brickHeight);
+            ctx.fillStyle = currentColor;
+            ctx.fill();
+            ctx.closePath();
+        }
+    }
+}
 
 function keyDownHandler(e) {
     if (e.keyCode == 39) {
@@ -42,6 +78,7 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBall();
     drawPaddle();
+    drawBricks();
 
     // Collision Detection
     if (y + dy < ballRadius) {
