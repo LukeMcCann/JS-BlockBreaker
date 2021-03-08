@@ -49,8 +49,12 @@ function draw() {
         currentColor = '#' + Math.floor(Math.random()*16777215).toString(16);
     } 
     else if (y + dy > (canvas.height - ballRadius)) {
-        document.location.reload();        
-        alert('Game Over!');
+        if (x > paddleX && x < paddleX + paddleWidth) {
+            dy = -dy
+        } else {
+            document.location.reload();        
+            alert('Game Over!');
+        }
     }
     if (x + dx > (canvas.width - ballRadius) || x + dx < ballRadius) {
         dx = -dx;
