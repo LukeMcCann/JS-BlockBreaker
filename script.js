@@ -3,6 +3,7 @@ const ctx = canvas.getContext('2d');
 
 setInterval(draw, 10);
 
+let currentColor = '#' + Math.floor(Math.random()*16777215).toString(16);
 // center horizontally
 let x = canvas.width/2;
 // line up 30px from bottom
@@ -20,9 +21,11 @@ function draw() {
     // Collision Detection
     if ( y + dy > canvas.height || y + dy < 0) {
         dy = -dy;
+        currentColor = '#' + Math.floor(Math.random()*16777215).toString(16);
     }
     if (x + dx > canvas.width || x + dx < 0) {
         dx = -dx;
+        currentColor = '#' + Math.floor(Math.random()*16777215).toString(16);
     }
 
     x += dx;
@@ -32,7 +35,7 @@ function draw() {
 function drawBall() {
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-    ctx.fillStyle = '#0095DD';
+    ctx.fillStyle = currentColor;
     ctx.fill();
     ctx.closePath();
 }
