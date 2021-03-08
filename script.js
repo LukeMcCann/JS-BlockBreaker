@@ -53,6 +53,14 @@ function draw() {
         currentColor = '#' + Math.floor(Math.random()*16777215).toString(16);
     }
 
+    if (rightPressed && paddleX < canvas.width-paddleWidth) {
+        paddleX += 7;
+    }
+
+    if (leftPressed && paddleX > 0) {
+        paddleX -= 7;
+    }
+
     x += dx;
     y += dy;
 }
