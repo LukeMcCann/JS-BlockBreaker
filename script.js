@@ -1,8 +1,6 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-setInterval(draw, 10);
-
 let currentColor = '#' + Math.floor(Math.random()*16777215).toString(16);
 // center horizontally
 let x = canvas.width/2;
@@ -13,10 +11,37 @@ let dx = 2;
 let dy = -2;
 const ballRadius = 10;
 
+let paddleHeight = 10;
+let paddleWidth = 75;
+let paddleX = ((canvas.width - paddleWidth)/2);
+
+let rightPressed = false;
+let leftPressed = false;
+
+document.addEventListener('keydown', keyDownHandler);
+document.addEventListener('keyup', keyUpHandler);
+
+function keyDownHandler(e) {
+    if (e.keyCode == 39) {
+        rightPressed = true;
+    } else if (e.keyCode == 37) {
+        leftPressed = true;
+    }
+}
+
+function keyUpHandler() {
+    if (e.keyCode == 39) {
+        rightReleased = false;
+    } else if (e.keyCode == 37) {
+        leftReleased = false;
+    }
+}
+
 function draw() {
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBall();
+    drawPaddle();
 
     // Collision Detection
     if ( y + dy > (canvas.height - ballRadius) || y + dy < ballRadius) {
@@ -39,3 +64,12 @@ function drawBall() {
     ctx.fill();
     ctx.closePath();
 }
+
+function drawPaddle() {
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+    ctx.fillStyle = currentColor;
+    ctx.fill();
+    ctx.closePath();
+}
+setInterval(draw, 10);
