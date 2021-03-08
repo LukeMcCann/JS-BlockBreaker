@@ -44,9 +44,13 @@ function draw() {
     drawPaddle();
 
     // Collision Detection
-    if ( y + dy > (canvas.height - ballRadius) || y + dy < ballRadius) {
+    if (y + dy < ballRadius) {
         dy = -dy;
         currentColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+    } 
+    else if (y + dy > (canvas.height - ballRadius)) {
+        document.location.reload();        
+        alert('Game Over!');
     }
     if (x + dx > (canvas.width - ballRadius) || x + dx < ballRadius) {
         dx = -dx;
