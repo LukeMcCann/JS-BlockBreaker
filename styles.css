@@ -6,3 +6,8 @@
     margin: 0;
 }
 
+#gameCanvas {
+    background-color: lightgrey;
+    display: block; /** set display block **/
+    margin: 0 auto; /** center canvas**/
+}
