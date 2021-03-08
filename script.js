@@ -19,11 +19,11 @@ function draw() {
     drawBall();
 
     // Collision Detection
-    if ( y + dy > canvas.height || y + dy < 0) {
+    if ( y + dy > (canvas.height - ballRadius) || y + dy < ballRadius) {
         dy = -dy;
         currentColor = '#' + Math.floor(Math.random()*16777215).toString(16);
     }
-    if (x + dx > canvas.width || x + dx < 0) {
+    if (x + dx > (canvas.width - ballRadius) || x + dx < ballRadius) {
         dx = -dx;
         currentColor = '#' + Math.floor(Math.random()*16777215).toString(16);
     }
